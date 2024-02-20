@@ -1,0 +1,9 @@
+[
+  {
+      "codes": {
+        "validCode" : "200",
+        "InvalidCode": "201"
+      },
+    "url": "https://reqres.in/api/users"
+  }
+]
