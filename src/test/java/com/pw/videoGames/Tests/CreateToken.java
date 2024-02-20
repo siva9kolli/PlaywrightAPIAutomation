@@ -7,6 +7,7 @@ import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.RequestOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -37,8 +38,6 @@ public class CreateToken {
         token = jsonNode.get("token").asText();
         //token = token1.substring(1, token1.length() - 1);
         System.out.println(jsonNode.toPrettyString());
-
-
     }
 
     @Test(dependsOnMethods = "createTokenAndPassToNextRequest")
@@ -60,7 +59,8 @@ public class CreateToken {
         JsonNode jsonNode1 = objectMapper1.readTree(apiResponse1.body());
 
         System.out.println(jsonNode1.toPrettyString());
-        System.out.println("category :: " +jsonNode1.get("category"));
+        System.out.println("category :: " +jsonNode1.get("category").asText());
+        Assert.assertEquals(jsonNode1.get("category").asText(), "Platform");
 
     }
 }

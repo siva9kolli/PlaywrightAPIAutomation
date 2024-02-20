@@ -1,1 +1,0 @@
-{"uuid":"6cb7fd27-dfb9-4351-b31e-2d55092ef954","name":"cpm.pw.apiTests.VerifyGetRequest","children":["d1deafe4-ca42-41f4-96d5-398219b28d27"],"befores":[{"name":"initializeCalls","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1708265928023,"stop":1708265928023}],"afters":[],"start":1708265928008,"stop":1708265928934}
