@@ -1,5 +1,6 @@
 package com.pw.videoGames.Tests;
 
+import DataManager.AppendDataToPropertiesFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.APIRequest;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class CreateToken {
        public String token;
@@ -37,6 +39,8 @@ public class CreateToken {
         System.out.println(jsonNode.get("token"));
         token = jsonNode.get("token").asText();
         //token = token1.substring(1, token1.length() - 1);
+        AppendDataToPropertiesFile appendDataToPropertiesFile = new AppendDataToPropertiesFile();
+        appendDataToPropertiesFile.appendDataToPropertiesFile("token", jsonNode.get("token").asText());
         System.out.println(jsonNode.toPrettyString());
     }
 
@@ -46,14 +50,16 @@ public class CreateToken {
         File file = new File("./testData/videoGameData.json");
         fileBytes = Files.readAllBytes(file.toPath());
 
+        AppendDataToPropertiesFile appendDataToPropertiesFile = new AppendDataToPropertiesFile();
+        Properties properties = appendDataToPropertiesFile.readPropertiesFile("./test.properties");
+
         Playwright playwright1 = Playwright.create();
         APIRequest apiRequest1 = playwright1.request();
         APIRequestContext apiRequestContext1 = apiRequest1.newContext();
         APIResponse apiResponse1 = apiRequestContext1.post("https://videogamedb.uk/api/videogame", RequestOptions.create()
-                .setHeader("Authorization", "Bearer "+ token)
+                .setHeader("Authorization", "Bearer "+ properties.getProperty("token"))
                 .setHeader("content-type", "application/json")
                 .setData(fileBytes));
-
 
         ObjectMapper objectMapper1 = new ObjectMapper();
         JsonNode jsonNode1 = objectMapper1.readTree(apiResponse1.body());

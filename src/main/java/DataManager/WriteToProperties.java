@@ -34,7 +34,7 @@ public class WriteToProperties {
 
     public void flush() throws FileNotFoundException, IOException {
         try (final OutputStream outputstream
-                     = new FileOutputStream("application.properties");) {
+                     = new FileOutputStream("token.properties");) {
             prop.store(outputstream,"File Updated");
             outputstream.close();
         }

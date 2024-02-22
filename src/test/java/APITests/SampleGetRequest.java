@@ -1,5 +1,6 @@
 package APITests;
 
+import DataManager.AppendDataToPropertiesFile;
 import DataManager.ReadJsonData;
 import DataManager.WriteToProperties;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -34,7 +35,9 @@ public class SampleGetRequest {
         System.out.println(statusText);
 
         WriteToProperties writeToProperties = new WriteToProperties();
-        writeToProperties.writeDataToProperties("supportText", body.get("support").get("text").asText());
+        AppendDataToPropertiesFile appendDataToPropertiesFile = new AppendDataToPropertiesFile();
+        appendDataToPropertiesFile.appendDataToPropertiesFile("supportText", body.get("support").get("text").asText());
+        //writeToProperties.writeDataToProperties("supportText", body.get("support").get("text").asText());
        // writeToProperties.writeDataToProperties("supportUrl", body.get("support").get("url").asText());
 
         System.out.println("Body :: " + body.toPrettyString());
